@@ -18,11 +18,13 @@ public:
         
         while(true){
             if(root != NULL){
+                // This goes to the left most available node
                 stt.push(root);
                 root = root -> left;
             }
             else{
                 if(stt.empty()) break;
+                // No nodes left to current node
                 root = stt.top();
                 inorder.push_back(root->val);
                 root = root->right;
