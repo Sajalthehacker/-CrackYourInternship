@@ -10,19 +10,26 @@
  * };
  */
 class Solution {
-private:
-    void dfs(TreeNode* root, vector<int> &inorder){
-        // Base Case
-        if(root == NULL) return;
-        
-        dfs(root->left, inorder);
-        inorder.push_back(root->val);
-        dfs(root->right, inorder);
-    }    
 public:
     vector<int> inorderTraversal(TreeNode* root) {
+        // Iterative
+        stack<TreeNode*> stt;
         vector<int> inorder;
-        dfs(root, inorder);
+        
+        while(true){
+            if(root != NULL){
+                stt.push(root);
+                root = root -> left;
+            }
+            else{
+                if(stt.empty()) break;
+                root = stt.top();
+                inorder.push_back(root->val);
+                root = root->right;
+                stt.pop();
+            }
+        }
+        
         return inorder;
     }
 };
