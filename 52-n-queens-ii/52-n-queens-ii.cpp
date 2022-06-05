@@ -1,6 +1,6 @@
 class Solution {
 private:
-    int cnt = 0;
+    int ans;
     
     bool isSafe(int row, int col, int n, vector<string> &board){
         //up-left diagnol
@@ -31,7 +31,7 @@ private:
     
     void solve(int col, int n, vector<string> &board){
         if(col == n){
-            cnt++;
+            ans++;
             return;
         }
         
@@ -45,7 +45,7 @@ private:
     }
 public:
     int totalNQueens(int n) {
-
+        ans = 0;
         vector<string> board(n);
         string s(n, '.');
         for(int i=0; i<n; i++){
@@ -53,6 +53,6 @@ public:
         }
         
         solve(0, n, board);
-        return cnt;
+        return ans;
     }
 };
