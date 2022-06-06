@@ -12,7 +12,7 @@
 class Solution {
 private:
     bool check(TreeNode* l, TreeNode* r){
-        if(!l || !r) return l==r;
+        if(l == NULL || r == NULL) return l==r;
         
         return (l->val == r->val) &&
             check (l->left, r->right) &&
@@ -20,7 +20,7 @@ private:
     }
 public:
     bool isSymmetric(TreeNode* root) {
-        if(root == NULL) return true;
+        if(root == NULL) return true; // Base Case
         return check(root->left, root->right);
     }
 };
