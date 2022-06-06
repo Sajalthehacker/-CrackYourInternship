@@ -16,12 +16,12 @@ private:
         if(!root) return;
         
         
-        dfs(root->left, low, high, sum);
+        if(root->val > low) dfs(root->left, low, high, sum);
         if(root->val >= low && root->val <= high) {
             cout<<root->val<<" ";
             sum += root->val;
         }
-        dfs(root->right, low, high, sum);
+        if(root->val < high) dfs(root->right, low, high, sum);
     }
 public:
     int rangeSumBST(TreeNode* root, int low, int high) {
