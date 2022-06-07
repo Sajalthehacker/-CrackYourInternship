@@ -1,6 +1,7 @@
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        // Two Pointers
         int tail1 = m-1, tail2 = n-1, fin = m+n-1;
         
         while(tail1 >= 0 && tail2 >= 0){
