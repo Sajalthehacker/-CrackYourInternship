@@ -14,7 +14,7 @@ public:
     bool hasPathSum(TreeNode* root, int tarSum) {
         if(root == NULL) return false;
         
-        if((!root->left && !root->right) && tarSum - root->val==0) return true;
+        if((!root->left && !root->right) && tarSum-root->val==0) return true;
         
         cout<<root->val<<" "<<tarSum<<"\n";
         return hasPathSum(root->left, tarSum-root->val) || 
