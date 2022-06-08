@@ -25,15 +25,13 @@ public:
     }
     
     int next() {
-        if(!stt.empty()){
-            TreeNode* temp = stt.top();
-            stt.pop();
-            if(temp->right){
-                pushAll(temp->right);
-            }
-            return temp->val;
+        TreeNode* temp = stt.top();
+        stt.pop();
+        if(temp->right){
+            pushAll(temp->right);
         }
-        return -1;
+        return temp->val;
+
     }
     
     bool hasNext() {
