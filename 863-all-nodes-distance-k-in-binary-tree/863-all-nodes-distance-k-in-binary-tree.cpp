@@ -23,9 +23,16 @@ public:
                 TreeNode* temp = que.front();
                 vis[temp->val] = true;
                 que.pop();
-                if(temp->left && !vis[temp->left->val]) que.push(temp->left);
-                if(temp->right && !vis[temp->right->val]) que.push(temp->right);
-                if(mpp.find(temp)!=mpp.end() && !vis[mpp[temp]->val]) que.push(mpp[temp]);
+                // Check for left child
+                if(temp->left && !vis[temp->left->val]) 
+                    que.push(temp->left);
+                // Check for right child
+                if(temp->right && !vis[temp->right->val]) 
+                    que.push(temp->right);
+                // Check for parent element
+                if(mpp.find(temp)!=mpp.end() && !vis[mpp[temp]->val]) 
+                    que.push(mpp[temp]);
+                
                 if(k==0) ans.push_back(temp->val);
             }
             k--;
