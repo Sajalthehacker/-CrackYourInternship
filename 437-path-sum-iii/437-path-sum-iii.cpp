@@ -13,21 +13,29 @@ class Solution {
 public:
     int pathSum(TreeNode* root, int targetSum) {
         if(root == NULL) return 0;
-        dfsSum(root, targetSum, 0);
-        pathSum(root->left, targetSum);
-        pathSum(root->right, targetSum);
+        unordered_map<int, int> mpp;
+        int pref = 0;
+        mpp[0] = 1;
+        dfsSum(root, targetSum, 0, mpp);
 
         return ans;
     }
 private:
     int ans = 0;
     const int N = 1e9;
-    void dfsSum(TreeNode* root, int sum, int curSum){
+    
+    void dfsSum(TreeNode* root, int sum, int curSum, unordered_map<int, int> &mpp){
         if(root == NULL) return;
-        curSum = ((curSum%N) + (root->val%N) % N);
-        if(curSum == sum) ans++;
         
-        dfsSum(root->left, sum, curSum);
-        dfsSum(root->right, sum, curSum);
+        // curSum += root->val;
+        curSum = ((curSum%N) + (root->val%N) % N);
+        if(mpp.find(curSum-sum) != mpp.end()){
+            ans += mpp[curSum-sum];
+        }
+        mpp[curSum]++;
+        dfsSum(root->left, sum, curSum, mpp);
+        dfsSum(root->right, sum, curSum, mpp);
+        mpp[curSum]--;
+        return;
     }
 };
