@@ -28,6 +28,7 @@ private:
         if(root == NULL) return;
         
         // curSum += root->val;
+        // Modular Addition, as the sum is btween -1000->1000, we can just use MOD 
         curSum = ((curSum%N) + (root->val%N) % N);
         if(mpp.find(curSum-sum) != mpp.end()){
             ans += mpp[curSum-sum];
