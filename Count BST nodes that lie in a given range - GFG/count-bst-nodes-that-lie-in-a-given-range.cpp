@@ -91,8 +91,11 @@ public:
     int getCount(Node *root, int l, int h){
         // your code goes here   
         if(root == NULL) return 0;
+        
         if(root->data >= l && root->data <=h)
             return 1 + getCount(root->left, l, h) + getCount(root->right, l, h);
+        
+        // Further Recursion Calls
         if(root->data < l) getCount(root->right, l, h);
         else getCount(root->left, l, h);
     }
