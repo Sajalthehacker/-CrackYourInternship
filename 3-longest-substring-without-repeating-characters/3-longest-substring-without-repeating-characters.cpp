@@ -11,7 +11,6 @@ public:
             }
             mpp[s[r]] = r;
             cnt = max(cnt, r-l+1);
-            cout<<cnt<<" "<<l<<" "<<r<<endl;
             r++;
         }
         return cnt;
