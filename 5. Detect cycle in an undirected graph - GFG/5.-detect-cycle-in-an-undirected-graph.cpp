@@ -4,32 +4,26 @@ using namespace std;
 
  // } Driver Code Ends
 class Solution {
-    private:
-    bool dfs(int s, int parent, vector<bool>& vis, vector<int> adj[]){
-        vis[s] = true;
-        
-        for(auto it:adj[s]){
-            if(!vis[it]){
-                if(dfs(it, s, vis, adj)) return true;
+private:
+    bool dfs(int source, int parent, vector<bool> &vis, vector<int> adj[]){
+        vis[source] = true;
+        for(int node : adj[source]){
+            if(vis[node] == false){
+                if(dfs(node, source, vis, adj)) return true;
             }
-            else if(it != parent) return true;
+            else if(node != parent) return true;
         }
         return false;
     }
-
 public:
-
     bool isCycle(int V, vector<int> adj[]) {
-        // Code here
         vector<bool> vis(V, false);
         for(int i=0; i<V; i++){
-            if(!vis[i]){
-                if( dfs(i, -1, vis, adj)==true ) return true;
+            if(vis[i] == false){
+                if(dfs(i, -1, vis, adj)) return true;
             }
         }
-        
         return false;
-        
     }
 };
 
