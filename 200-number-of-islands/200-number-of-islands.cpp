@@ -1,17 +1,22 @@
 class Solution {
 private:
     int n, m, cnt = 0;
+    int directions[4][2] ={{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; 
     void dfs(int i, int j, vector<vector<bool>> &vis, vector<vector<char>> &grid){
-        // Base Case
-        if(i<0 || j<0 || i>=n || j>=m || grid[i][j] != '1' || vis[i][j]) return;
         
+        if(i<0 || j<0 || i>=n || j>=m) return; // Index out of bounds condition
+        if (grid[i][j] != '1' || vis[i][j]) return; // No Bridge Condition
+
         vis[i][j] = true;
         // cout << cnt << " ";
-        // Further dfs calls
-        dfs(i+1, j, vis, grid);        
-        dfs(i-1, j, vis, grid);
-        dfs(i, j+1, vis, grid);
-        dfs(i, j-1, vis, grid);
+        // Further dfs calls : up, down, right, left
+        // dfs(i+1, j, vis, grid);        
+        // dfs(i-1, j, vis, grid);
+        // dfs(i, j+1, vis, grid);
+        // dfs(i, j-1, vis, grid);
+        for(auto it : directions){
+            dfs(i+it[0], j+it[1], vis, grid);
+        }
 
     }
     
