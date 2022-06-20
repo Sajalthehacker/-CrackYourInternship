@@ -10,10 +10,9 @@ private:
         vis[i][j] = true;
         // cout << cnt << " ";
         // Further dfs calls : up, down, right, left
-        // dfs(i+1, j, vis, grid);        
-        // dfs(i-1, j, vis, grid);
-        // dfs(i, j+1, vis, grid);
-        // dfs(i, j-1, vis, grid);
+        // dfs(i+1, j, vis, grid); // dfs(i-1, j, vis, grid); 
+        // dfs(i, j+1, vis, grid); // dfs(i, j-1, vis, grid);
+        // These four manual calls can be written cleanly as direction array
         for(auto it : directions){
             dfs(i+it[0], j+it[1], vis, grid);
         }
