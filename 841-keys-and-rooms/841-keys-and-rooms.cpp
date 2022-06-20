@@ -18,6 +18,8 @@ public:
         // By the end every room should be visited
         // If there is any room left unvisited, then impossible
         
+        // We can even optimize this by counting number of visited rooms, 
+        // if its equal to N, all room are visited, else no.
         return roomCnt == n;
     }
 };
