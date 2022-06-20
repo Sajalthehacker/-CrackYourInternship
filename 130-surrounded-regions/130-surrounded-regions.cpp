@@ -17,12 +17,15 @@ public:
         n = board.size();
         m = board[0].size();
         
-        // Travel Left Boundary
+        // Travel all the 4 Boundaries
         for(int i=0; i<n; i++) if(board[i][0] == 'O') dfs(i, 0, board);
         for(int i=0; i<n; i++) if(board[i][m-1] == 'O') dfs(i, m-1, board);
         for(int i=0; i<m; i++) if(board[0][i] == 'O') dfs(0, i, board);
         for(int i=0; i<m; i++) if(board[n-1][i] == 'O') dfs(n-1, i, board);
+        // In dfs calls we made all the components touching boundary to #
         
+        // Now traverse the grid again,
+        // And make all # -> O & all O -> X
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
                 if(board[i][j] == '#') board[i][j] = 'O';
