@@ -15,6 +15,10 @@ private:
     }
 public:
     bool canFinish(int n, vector<vector<int>>& prereq) {
+        
+        // In this question, we just have to check if there is cycle present
+        // If there is a cycle, it creates a deadlock, adn none of course cmpletes
+        
         vector<int> adj[n];
         vector<bool> vis(n, false);
         vector<bool> check(n, false);
