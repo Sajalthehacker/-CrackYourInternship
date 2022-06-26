@@ -1,28 +1,27 @@
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
+        // Application of Sliding Window & Prefix Sum
+        // We have to find min sum subarray of length (n-k) & subtract it from total sum
         int n = cardPoints.size();
-        int sum = 0;
-        for(int it : cardPoints){
-            sum += it;
-        }
+        int miniSum, totalSum = 0, preSum = 0;
         
-        int window = 0;
         for(int i=0; i<n-k; i++){
-            window += cardPoints[i];
+            preSum += cardPoints[i];
+            totalSum += cardPoints[i]; 
         }
-        int l=0, r=n-k-1;
-        int maxi = sum - window;
-        while(r<n-1){
+        miniSum = preSum;
+        int l = 0, r = n-k-1;
+        
+        while(r+1 < n){
             r++;
-            window += (cardPoints[r]);
-            window -= (cardPoints[l]);
+            totalSum += cardPoints[r];
+            preSum += cardPoints[r];
+            preSum -= cardPoints[l];
             l++;
             
-            maxi = max(maxi, sum-window);
+            miniSum = min(miniSum, preSum);
         }
-        
-        return maxi;
-        
+        return totalSum - miniSum;
     }
 };
