@@ -1,15 +1,15 @@
 class Solution {
-private:
-    int fn(int pre, int n, vector<int>&dp){
-        if(pre == n ) return 1;
-        if(pre > n) return 0;       
-        if(dp[pre] != -1) return dp[pre];
-        
-        return dp[pre] = fn(pre+1, n, dp) + fn(pre+2, n, dp);
-    }
 public:
     int climbStairs(int n) {
-        vector<int> dp(n+1, -1);
-        return fn(0, n, dp);
+        // Tabulation
+        if(n <= 2) return n;
+        
+        vector<int> dp(n+1);
+        dp[n] = dp[n-1] = 1;
+        
+        for(int i=n-2; i>=0; i--){
+            dp[i] = dp[i+1] + dp[i+2];
+        }
+        return dp[0];
     }
 };
