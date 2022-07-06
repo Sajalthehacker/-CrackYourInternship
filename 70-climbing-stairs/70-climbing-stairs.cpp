@@ -4,12 +4,12 @@ public:
         // Tabulation
         if(n <= 2) return n;
         
-        vector<int> dp(n+1);
-        dp[n] = dp[n-1] = 1;
-        
+        int b = 1, a = 1, res;
         for(int i=n-2; i>=0; i--){
-            dp[i] = dp[i+1] + dp[i+2];
+            res = b + a;
+            a = b;
+            b = res;
         }
-        return dp[0];
+        return res;
     }
 };
