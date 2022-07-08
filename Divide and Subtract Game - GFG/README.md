@@ -1,5 +1,5 @@
 # Divide and Subtract Game
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Jon and Arya are playing a game. Rules of game as follows:<br>
 <strong>·</strong>&nbsp;&nbsp;They have a single number <strong>N</strong> initially.</span><br>
