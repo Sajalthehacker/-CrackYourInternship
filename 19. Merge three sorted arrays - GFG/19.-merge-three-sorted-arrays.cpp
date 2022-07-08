@@ -21,19 +21,14 @@ class Solution{
     { 
         //Your code here
         vector<int>v;
-       int n=A.size();
-       int m=B.size();
-       int p=C.size();
-       for(int i=0;i<n;i++)
-       {
+       int n=A.size(), m=B.size(), p=C.size();
+       for(int i=0;i<n;i++){
            v.push_back(A[i]);
        }
-       for(int i=0;i<m;i++)
-       {
+       for(int i=0;i<m;i++){
            v.push_back(B[i]);
        }
-       for(int i=0;i<p;i++)
-       {
+       for(int i=0;i<p;i++){
            v.push_back(C[i]);
        }
        sort(v.begin(),v.end());
