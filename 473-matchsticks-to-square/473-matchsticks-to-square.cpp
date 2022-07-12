@@ -3,7 +3,7 @@ private:
     long long sum = 0, len;
     bool dfs(int ind, vector<int>& dir, vector<int>& match){
         if(ind == match.size()){
-            return true;
+            if(dir[0] == dir[1] && dir[1] == dir[2] && dir[2] == dir[3]) return true;
         }
         
         for(int i=0; i<4; i++){
