@@ -9,6 +9,9 @@ private:
     }
 public:
     int minimumTotal(vector<vector<int>>& triangle) {
+        // Rescursive Approach
+        // TC : O(n*(n-1)/2) ~ O(n^2)    &&   SC : O(n^2) + O(n)->extra space for Recursion Stack
+        
         int n = triangle.size();
         vector<vector<int>> dp(n, vector<int>(n, -1));
         return fn(0, 0, n, dp, triangle);
