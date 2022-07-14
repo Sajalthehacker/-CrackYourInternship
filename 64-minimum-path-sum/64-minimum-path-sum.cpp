@@ -1,20 +1,23 @@
 class Solution {
-private:
-    int fn(int i, int j, vector<vector<int>> &dp, vector<vector<int>>& grid){
-        if(i==0 && j==0) return grid[0][0];
-        if(j == 0) return grid[i][j] + fn(i-1, j, dp, grid);
-        if(i == 0) return grid[i][j] + fn(i, j-1, dp, grid);
-        
-        if(dp[i][j] != -1) return dp[i][j];
-        
-        return dp[i][j] = grid[i][j] + min(fn(i-1, j, dp, grid) , fn(i, j-1, dp, grid));
-    }
 public:
     int minPathSum(vector<vector<int>>& grid) {
-        // Recursive Approach 
-        // TC : O(n*m) && SC : O(n*m) + O(n+m-2)-> extra space for recursion call stack
+        // Iterative Approach 
+        // TC : O(n*m) && SC : O(n*m)
         int n = grid.size(), m = grid[0].size();
-        vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
-        return fn(n-1, m-1, dp, grid);
+        
+        // State : dp(i, j) -> min path-sum from (i, j) to (n, m);
+        vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
+        dp[n-1][m-1] = grid[n-1][m-1];
+        for(int i=n-1; i>=0; i--){
+            for(int j=m-1; j>=0; j--){
+                if(i == n-1 && j == m-1) dp[i][j] = grid[i][j];
+                else if(i == n-1) dp[i][j] = grid[i][j] + dp[i][j+1];
+                else if(j == m-1) dp[i][j] = grid[i][j] + dp[i+1][j];
+                else{
+                    dp[i][j] = grid[i][j] + min(dp[i+1][j], dp[i][j+1]);
+                }
+            }
+        }
+        return dp[0][0];
     }
 };
