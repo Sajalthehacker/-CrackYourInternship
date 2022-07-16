@@ -18,7 +18,7 @@ public:
         long long down = fn(i+1, j, m, n, maxMove-1, dp);
         long long up = fn(i-1, j, m, n, maxMove-1, dp);
         
-        return dp[i][j][maxMove] = (int)(((left % mod) +(right % mod) +(up % mod) +(down % mod)) % mod);
+        return dp[i][j][maxMove] = (int) ((left + right + up + down) % mod);
 
     }
 };
