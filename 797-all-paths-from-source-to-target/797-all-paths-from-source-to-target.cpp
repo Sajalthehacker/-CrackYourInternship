@@ -4,14 +4,11 @@ private:
     int n;
     
     void dfs(int vertex, vector<int> &prePath, vector<vector<int>>& adj, vector<bool> vis){
-        if(vertex == n-1){
-            prePath.push_back(vertex);
-            allPaths.push_back(prePath);
-            prePath.pop_back();
-            return;
-        }
         vis[vertex] = true;
         prePath.push_back(vertex);
+        if(vertex == n-1){
+            allPaths.push_back(prePath);
+        }
         for(int child : adj[vertex]){
             if(vis[child]) continue;
             dfs(child, prePath, adj, vis);
