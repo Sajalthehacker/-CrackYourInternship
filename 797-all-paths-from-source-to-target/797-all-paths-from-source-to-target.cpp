@@ -1,35 +1,30 @@
 class Solution {
 private:
-    int n;
     vector<vector<int>> allPaths;
-    vector<bool> vis;
+    int n;
     
-    void dfs(int node, vector<int> &path, vector<vector<int>>& graph){
-        
-        vis[node] = true;
-        path.push_back(node);
-        
-        if(node == n-1){
-            allPaths.push_back(path);
-            // return;
+    void dfs(int vertex, vector<int> &prePath, vector<vector<int>>& adj, vector<bool> vis){
+        if(vertex == n-1){
+            prePath.push_back(vertex);
+            allPaths.push_back(prePath);
+            prePath.pop_back();
+            return;
         }
-        
-        for(int it : graph[node]){
-            if(vis[it]) continue;
-            dfs(it, path, graph);
-            vis[it] = false;
+        vis[vertex] = true;
+        prePath.push_back(vertex);
+        for(int child : adj[vertex]){
+            if(vis[child]) continue;
+            dfs(child, prePath, adj, vis);
         }
-        
-        path.pop_back();
+        prePath.pop_back();
+        vis[vertex] = false;
     }
 public:
-    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
-        n = graph.size();
-        vis.resize(n, false);
-        vector<int> path;
-        
-        dfs(0, path, graph);
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& adj) {
+        n = adj.size();
+        vector<int> prePath;
+        vector<bool> vis(n, false);
+        dfs(0, prePath, adj, vis);
         return allPaths;
-        
     }
 };
