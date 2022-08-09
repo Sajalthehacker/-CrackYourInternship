@@ -11,13 +11,13 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        // Base Case
-        if(head==NULL || head->next==NULL) return head;
-    
-        ListNode* newHead = deleteDuplicates(head->next);
-        if(head->val == newHead->val) return newHead;
+        if(head == NULL || head -> next == NULL) return head;
+        
+        ListNode* newHead = deleteDuplicates(head -> next);
+        
+        if(head -> val == newHead -> val) return newHead;
         else{
-            head->next = newHead;
+            head -> next = newHead;
             return head;
         }
     }
