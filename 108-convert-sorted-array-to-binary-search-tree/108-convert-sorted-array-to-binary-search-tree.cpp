@@ -11,21 +11,23 @@
  */
 class Solution {
 private:
-    TreeNode* createBST(vector<int> &nums, int start, int end){
-        if(start > end){
-            return NULL;
-        }
-        int mid = (start+end) >> 1;
+    TreeNode* createBST(int l, int r, vector<int> &nums){
+        // Base Case
+        if(l > r) return NULL;
+        int mid = l + (r - l)/2;
         
+        // As this is a BST, We assume middle ele as a root, 
+        // Left subArray as left sub-tree, right subarray as Right sun-tree
         TreeNode* root = new TreeNode(nums[mid]);
-        root->left = createBST(nums, start, mid-1);
-        root->right = createBST(nums, mid+1, end);
+        root -> left = createBST(l, mid-1, nums);
+        root -> right = createBST(mid+1, r, nums);
         
+        // return the root
         return root;
     }
 public:
     TreeNode* sortedArrayToBST(vector<int>& nums) {
-        if(nums.size() == 0) return NULL; // Base Case
-        return createBST(nums, 0, nums.size()-1);
+        int n = nums.size()-1;
+        return createBST(0, n, nums);
     }
 };
