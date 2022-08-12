@@ -9,13 +9,17 @@
  */
 
 class Solution {
+private:
+    TreeNode* dfs(TreeNode* root, TreeNode* p, TreeNode* q){
+        if(root->val == p->val || root->val == q->val
+          || (root->val <= max(p->val, q->val) && (root->val >= min(p->val, q->val)))) 
+            return root;
+        
+        if(root->val < p->val && root->val < q->val) return dfs(root->right, p, q);
+        else return dfs(root->left, p, q);
+    }
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        while(root != NULL){
-            if(root->val > p->val && root->val > q->val) root = root->left;
-            else if(root->val < p->val && root->val < q->val) root = root->right;
-            else return root;
-        }
-        return root;
+        return dfs(root, p, q);
     }
 };
