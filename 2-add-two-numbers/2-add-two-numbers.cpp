@@ -14,35 +14,21 @@ public:
         ListNode* ans = new ListNode(-1);
         ListNode* itr = ans;
         int sum, carry = 0;
-        while(l1 && l2){
-            sum = l1->val + l2->val + carry;
+        while(l1 || l2 || carry){
+            sum = 0;
+            if(l1) {
+                sum += l1->val;
+                l1 = l1 -> next;
+            }
+            if(l2) {
+                sum += l2->val;
+                l2 = l2 -> next;
+            }
+            sum += carry;
             carry = sum / 10;
             ListNode* dig = new ListNode(sum % 10);
             itr -> next = dig;
             itr = itr -> next;
-            l1 = l1 -> next;
-            l2 = l2 -> next;
-        }
-        
-        while(l1){
-            sum = l1->val + carry;
-            carry = sum / 10;
-            ListNode* dig = new ListNode(sum % 10);
-            itr -> next = dig;
-            itr = itr -> next;
-            l1 = l1 -> next;
-        }
-        while(l2){
-            sum = l2->val + carry;
-            carry = sum / 10;
-            ListNode* dig = new ListNode(sum % 10);
-            itr -> next = dig;
-            itr = itr -> next;
-            l2 = l2 -> next;
-        }
-        if(carry){
-            ListNode* dig = new ListNode(carry);
-            itr -> next = dig;
         }
         return ans -> next;
     }
