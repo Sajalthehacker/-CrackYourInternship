@@ -12,8 +12,6 @@ private:
     }
 public:
     vector<vector<int>> subsets(vector<int>& nums) {
-        // As we need the elments in inc order, lets sort the array
-        sort(nums.begin(), nums.end());
         
         vector<vector<int>> powerSet;
         vector<int> ds;
