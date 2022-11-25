@@ -13,21 +13,23 @@ class Solution
         // create adj list
         vector<int> minDist(V, 1e9);
 
-        priority_queue<pair<int, int> ,vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        // priority_queue<pair<int, int> ,vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        set<pair<int, int>> stt;
         
         // Dijkstra's Algo
-        pq.push({0, S}); // forma to push in pq : {dist, node}
+        stt.insert({0, S}); // forma to push in pq : {dist, node}
         minDist[S] = 0;
+        int mini = S;
         
-        while(!pq.empty()){
+        while(!stt.empty()){
  
-            auto curr = pq.top();
-            pq.pop();
+            auto curr = *stt.begin();
+            stt.erase(curr);
             for(auto it : adj[curr.second]){
                 int dist = it[1], node = it[0];
                 if(dist + minDist[curr.second] < minDist[node]){
                     minDist[node] = dist + minDist[curr.second];
-                    pq.push({dist + minDist[curr.second], node});
+                    stt.insert({dist + minDist[curr.second], node});
                 }
             }
         }
