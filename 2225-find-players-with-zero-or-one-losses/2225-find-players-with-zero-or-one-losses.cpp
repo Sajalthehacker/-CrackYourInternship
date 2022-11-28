@@ -1,8 +1,8 @@
 class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
-        unordered_map<int, int> mpp;
-        unordered_set<int> stt;
+        map<int, int> mpp;
+        set<int> stt;
         vector<vector<int>> ans(2);
         
         for(auto it : matches){
@@ -19,9 +19,6 @@ public:
         for(auto it : stt){
             ans[0].push_back(it);
         }
-        sort(ans[0].begin(), ans[0].end());        
-        sort(ans[1].begin(), ans[1].end());
-        
         return ans;
     }
 };
