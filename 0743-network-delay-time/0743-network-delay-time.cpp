@@ -20,8 +20,8 @@ public:
             auto curr = pque.top();
             pque.pop();
             int currTime = curr.first, currNode = curr.second; 
-            if(vis[currNode]) continue;
-            vis[currNode] = true;
+            // if(vis[currNode]) continue;
+            // vis[currNode] = true;
             
             for(auto next : adj[currNode]){
                 int nextNode = next.first, nextWeight = next.second;
