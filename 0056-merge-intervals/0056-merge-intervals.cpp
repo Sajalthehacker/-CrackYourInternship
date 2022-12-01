@@ -9,16 +9,18 @@ public:
         sort(intervals.begin(), intervals.end(), comp);
         vector<vector<int>> ans;
         int n = intervals.size();
-        for(int i=0; i<n; i++){
-            int pStart = intervals[i][0], pEnd = intervals[i][1];
-            while(i < n && pEnd >= intervals[i][0]){
-                pStart = min(pStart, intervals[i][0]);
-                pEnd = max(pEnd, intervals[i][1]);
-                i++;
+        vector<int> prev = intervals[0];
+        
+        for(int i=1; i<n; i++){
+            if(prev[1] >= intervals[i][0]){
+                prev = {min(prev[0], intervals[i][0]), max(prev[1], intervals[i][1])};
             }
-            i--;
-            ans.push_back({pStart, pEnd});
+            else{
+                ans.push_back(prev);
+                prev = intervals[i];
+            }
         }
+        ans.push_back(prev); // last interval
         return ans;
     }
 };
