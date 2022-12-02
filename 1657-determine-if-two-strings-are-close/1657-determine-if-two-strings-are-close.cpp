@@ -12,10 +12,6 @@ public:
         sort(mpp1.begin(), mpp1.end());
         sort(mpp2.begin(), mpp2.end());
 
-        for(int it : mpp1) cout << it << " ";
-        cout << endl;
-        for(int it : mpp2) cout << it << " ";
-        cout << endl;
         
         for(int i=0; i<26; i++)
             if(mpp1[i] != mpp2[i]) return false;
