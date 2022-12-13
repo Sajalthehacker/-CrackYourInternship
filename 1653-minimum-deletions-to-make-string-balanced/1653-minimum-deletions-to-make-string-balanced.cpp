@@ -1,6 +1,7 @@
 class Solution {
 public:
     int minimumDeletions(string s) {
+        // Explanation : bit.ly/3UUyqnd
         int n = s.size();
         int cntA = 0, cntB = 0;
         for(char it : s) 
