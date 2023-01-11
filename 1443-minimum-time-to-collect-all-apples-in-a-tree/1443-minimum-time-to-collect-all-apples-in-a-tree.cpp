@@ -4,11 +4,9 @@ public:
         int time = 0;
         for(int it : adj[node]){
             if(it == parent) continue;
-            time += dfs(it, node, adj, hasApple);
-        }
-        
-        if(hasApple[node] || time > 0){
-            return (2 + time); 
+            int childTime = dfs(it, node, adj, hasApple);
+            if(childTime || hasApple[it]) 
+                time += 2+ childTime;
         }
         return time;
     }
@@ -21,8 +19,8 @@ public:
             adj[it[0]].push_back(it[1]);
             adj[it[1]].push_back(it[0]);
         }
-        int ans = dfs(0, -1, adj, hasApple);
-        if(ans > 0) return ans - 2;
-        return ans;
+        return dfs(0, -1, adj, hasApple);
+        // if(ans > 0) return ans - 2;
+        // return ans;
     }
 };
