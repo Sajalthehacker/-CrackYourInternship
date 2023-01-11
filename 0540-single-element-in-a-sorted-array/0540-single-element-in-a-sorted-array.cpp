@@ -5,29 +5,19 @@ public:
         
         int low = 0, high = nums.size() - 1, mid;
         
-        while(low <= high){
+        while(low < high){
             mid = low + (high - low) / 2;
+            // number ^ 1 flips the last bit,
+            // if num is odd it becomes odd - 1
+            // if num is even it becomes even + 1 
             
-            if(mid%2 == 0){
-                if(mid > 0 && nums[mid-1] == nums[mid]){
-                    high = mid - 1;
-                }
-                else if(mid < nums.size()-1 && nums[mid] == nums[mid+1]){
-                    low = mid + 1;
-                }
-                else return nums[mid];
+            // If this isnt undersytandable , refer previous submissions
+            if(nums[mid] == nums[mid^1]){  
+                low = mid + 1;
             }
-            else{
-               if(mid > 0 && nums[mid-1] == nums[mid]){
-                    low = mid + 1;
-                }
-                else if(mid < nums.size()-1 && nums[mid] == nums[mid+1]){
-                    high = mid - 1;
-                }
-                else return nums[mid];
-            }
+            else high = mid;
         }
-        return -1;
+        return nums[low];
         
     }
 };
