@@ -1,21 +1,20 @@
 class Solution {
 public:
     bool isValid(string s) {
-        stack<char> stt;
+        vector<char> stt;
         for(int i=0; i<s.size(); i++){
-            stt.push(s[i]);
-            if(stt.size() >= 3){
-                char c1, c2, c3;
-                c1 = stt.top(); stt.pop();
-                c2 = stt.top(); stt.pop();
-                c3 = stt.top(); stt.pop();
-                if(!(c1 == 'c' && c2 == 'b' && c3 == 'a')){
-                    stt.push(c3); stt.push(c2); stt.push(c1);
+            stt.push_back(s[i]);
+            string curr = "";
+            if(stt.size()>=3){
+                for(int j = stt.size() - 3 ; j< stt.size(); j++)
+                    curr.push_back(stt[j]);
+                if(curr == "abc"){
+                    for(int k=0; k<3; k++) stt.pop_back();
                 }
+                
             }
-            
         }
-        if(stt.empty()) return true;
+        if(stt.size() == 0) return true;
         else return false;
     }
 };
