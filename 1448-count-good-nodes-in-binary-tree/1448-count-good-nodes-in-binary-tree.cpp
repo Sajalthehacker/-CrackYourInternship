@@ -10,21 +10,15 @@
  * };
  */
 class Solution {
-private:
-    int ans = 0;
-    void dfs(TreeNode* root, int maxi){
-        if(root == NULL) return ;
-        // cout << root -> val << " " << maxi << endl;
-        if(root -> val >= maxi) {
+public:
+    int goodNodes(TreeNode* root, int maxi = INT_MIN) {
+        int ans = 0;
+        if(root == NULL) return 0;
+        if(root->val >= maxi){
+            maxi = max(maxi, root->val);
             ans++;
         }
-        maxi = max(maxi, root -> val);
-        dfs(root->left, maxi);
-        dfs(root->right, maxi);
-    }
-public:
-    int goodNodes(TreeNode* root) {
-        dfs(root, -1e6);
+        ans += goodNodes(root->left, maxi) + goodNodes(root->right, maxi);
         return ans;
     }
 };
