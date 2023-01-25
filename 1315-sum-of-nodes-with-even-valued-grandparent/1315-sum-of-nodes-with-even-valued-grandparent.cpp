@@ -16,7 +16,8 @@ public:
         int sum = 0;
         if(gp%2 == 0) sum += root -> val;
         
-        sum += sumEvenGrandparent(root->left, root->val, p) + sumEvenGrandparent(root->right, root->val, p);
-        return sum;
+        int ls = sumEvenGrandparent(root->left, root->val, p);
+        int rs = sumEvenGrandparent(root->right, root->val, p);
+        return sum + ls + rs;
     }
 };
