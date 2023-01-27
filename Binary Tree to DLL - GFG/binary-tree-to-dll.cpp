@@ -115,24 +115,32 @@ class Solution
 {
     public:
     vector<int> inorder;
-    void dfs(Node* root){
-        if(root == NULL) return;
-        dfs(root -> left);
-        inorder.push_back(root -> data);
-        dfs(root -> right);
+    pair<Node*, Node*> dfs(Node* root){
+        if(root == NULL) return {NULL, NULL};
+        
+        pair<Node*, Node*> ll = dfs(root -> left);
+        pair<Node*, Node*> rr = dfs(root -> right);
+        
+        root -> left = ll.second;
+        if(ll.second) ll.second -> right = root;
+        
+        root -> right = rr.first;
+        if(rr.first) rr.first -> left = root; 
+        
+        pair<Node*, Node*> ans;
+        
+        if(ll.first) ans.first = ll.first;
+        else ans.first = root;
+        
+        if(rr.second) ans.second = rr.second;
+        else ans.second = root;
+        return ans;
     }
     //Function to convert binary tree to doubly linked list and return it.
     Node * bToDLL(Node *root){
-        dfs(root);
-        Node* head = new Node(inorder[0]);
-        Node* prev = head;
-        for(int i=1; i<inorder.size(); i++){
-            Node* temp = new Node(inorder[i]);
-            prev -> right = temp;
-            temp -> left = prev;
-            prev = prev -> right;
-        }
-        return head;
+        auto ans = dfs(root);
+        
+        return ans.first;
     }
 };
 
