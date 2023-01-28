@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 #define MAX_HEIGHT 100000
@@ -90,40 +90,38 @@ Node* buildTree(string str)
 }
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 //Function to return a list containing the bottom view of the given tree.
 
 class Solution {
   public:
-    vector<int> bottomView(Node *root) {
-        vector<int> ans;
-        map<int, int> mpp;
-        
-        if(root == NULL) return ans; // Base Case
+    vector <int> bottomView(Node *root) {
+        // Your Code Here
+        // If we draw the vertical lines, bottom view is the last ele in every line
+        vector<int> bo;
+        map<int, int> mpp; // stores/updates every element off line
+        // used map, so that element keys(lines) are in sorted order
+        // have to perform nl;y bfs  because, we need last depth nodes
         
         queue<pair<Node*, int>> que;
         que.push({root, 0});
-        
         while(!que.empty()){
-            auto curr = que.front();
+            auto it = que.front();
             que.pop();
-            mpp[curr.second] = curr.first->data;
-            if(curr.first -> left != NULL) 
-                que.push({curr.first -> left, curr.second-1});
-            if(curr.first -> right != NULL) 
-                que.push({curr.first -> right, curr.second+1});
+            Node* curr = it.first;
+            int level = it.second;
+            mpp[level] = curr -> data;
+            if(curr -> left) que.push({curr->left, level-1});
+            if(curr -> right) que.push({curr->right, level+1});
         }
-        
-        for(auto it: mpp){
-            ans.push_back(it.second);
+        for(auto it : mpp){
+            bo.push_back(it.second);
         }
-        return ans;
-        
-        
+        return bo;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main() {
     int t;
@@ -144,4 +142,5 @@ int main() {
 }
 
 
-  // } Driver Code Ends
+
+// } Driver Code Ends
