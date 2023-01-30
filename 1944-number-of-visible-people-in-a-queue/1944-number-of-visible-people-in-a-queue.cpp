@@ -10,7 +10,8 @@ public:
                 stt.pop();
                 cnt++;
             }
-            if(!stt.empty()) cnt++;
+            // There is an another tower to look in the right, if stack is not empty
+            if(!stt.empty()) cnt++; 
             ngr[i] = cnt;
             stt.push(heights[i]);
             
