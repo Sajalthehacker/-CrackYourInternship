@@ -5,13 +5,11 @@ public:
         for(int it : amount) pque.push(it);
         int ans = 0;
         while(pque.size() >= 2){
-            int a = pque.top();
-            pque.pop();
-            int b = pque.top();
-            pque.pop();
-            if(a>0) a -= 1;
-            else break;
+            int a = pque.top(); pque.pop();
+            int b = pque.top(); pque.pop();
+            if(a>0) a -= 1; else break;
             if(b>0) b -= 1;
+            
             if(a>0) pque.push(a);
             if(b>0) pque.push(b);
             ans++;
