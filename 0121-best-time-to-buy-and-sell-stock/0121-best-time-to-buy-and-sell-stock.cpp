@@ -1,15 +1,11 @@
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
-        // Kadane's Algo - Application
-        // Same as Max-SubArray Sum, here we consider differences.
-        // link : https://bit.ly/3PzHIDG
-        
-        int n = prices.size(), maxP = 0, currP = 0;
-        for(int i=1; i<n; i++){
-            currP = max(0, currP + (prices[i] - prices[i-1]));
-            maxP = max(maxP, currP);
+        int n = prices.size(), currProfit=0, maxProfit = 0;
+        for(int i=0; i<n-1; i++){
+            currProfit = max(0, currProfit + (prices[i+1]-prices[i]));
+            maxProfit = max(maxProfit, currProfit);
         }
-        return maxP;
+        return maxProfit;
     }
 };
