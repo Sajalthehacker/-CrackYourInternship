@@ -17,6 +17,7 @@ public:
             }
             else start = mid + 1;
         }
+        
         if(arr[start] - start - 1 >= k) {
             return arr[start] - (arr[start] - start - k);
         }
