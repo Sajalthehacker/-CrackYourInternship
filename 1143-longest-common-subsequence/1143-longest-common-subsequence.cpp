@@ -1,24 +1,21 @@
 class Solution {
 public:
-    int longestCommonSubsequence(string text1, string text2) {
-        int n = text1.length(), m = text2.length();
-        vector<vector<int>> dp(n+1, vector<int>(m+1, 0));
-        
-        // Bottoms Up Approach
-        for(int i=n-1; i>=0; i--){
-            for(int j=m-1; j>=0; j--){
-                if(text1[i] == text2[j]){
-                    // If Char at text1[i] & text2[j] are equal
-                    // We add 1 to our answer as its incresing
-                    dp[i][j] = 1 + dp[i+1][j+1];
-                }
-                else{
-                    // If they arent equal, we sustitue right val or down val of LCS
-                    // As this particular combination did not contribue to LCS
-                    dp[i][j] = max(dp[i][j+1], dp[i+1][j]);
-                }
-            }
+    int fn(int n, int m, string &text1, string &text2, vector<vector<int>> &dp){
+        if(n<0 || m<0) return 0;
+        if(dp[n][m] != -1) return dp[n][m];
+        int lcs;
+        if(text1[n] == text2[m]){
+            lcs = 1 + fn(n-1, m-1, text1, text2, dp);
         }
-        return dp[0][0];
+        else {
+            lcs = max(fn(n-1, m, text1, text2, dp) , fn(n, m-1, text1, text2, dp));
+        }
+        return dp[n][m] = lcs;
+    }
+    
+    int longestCommonSubsequence(string text1, string text2) {
+        int n = text1.size(), m = text2.size();
+        vector<vector<int>> dp(n, vector<int>(m, -1));
+        return fn(n-1, m-1, text1, text2, dp);
     }
 };
