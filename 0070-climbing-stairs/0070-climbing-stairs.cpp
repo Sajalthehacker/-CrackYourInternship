@@ -1,17 +1,14 @@
 class Solution {
 public:
+    int fn(int n, vector<int> &dp){
+        if(n < 0) return 0;
+        if(n == 0) return 1;
+        if(dp[n] != -1) return dp[n];
+        int ways = fn(n-1, dp) + fn(n-2, dp);
+        return dp[n] = ways;
+    }
     int climbStairs(int n) {
-        // Tabulation
-        // This is memory optimised version of tabulation method
-        // please look into previous submissions
-        if(n <= 2) return n;
-        
-        int b = 1, a = 1, res;
-        for(int i=n-2; i>=0; i--){
-            res = b + a;
-            a = b;
-            b = res;
-        }
-        return res;
+        vector<int> dp(n+1, -1);
+        return fn(n, dp);
     }
 };
