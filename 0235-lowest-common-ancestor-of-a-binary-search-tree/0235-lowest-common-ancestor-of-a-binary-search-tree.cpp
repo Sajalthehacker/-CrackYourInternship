@@ -16,7 +16,7 @@ public:
         if(root == NULL) return NULL;
         int mini = min(p->val, q->val), maxi = max(p->val, q->val);
         
-        if(root -> val >= mini && root -> val <= maxi) return root; // split
+        if(root -> val >= mini && root -> val <= maxi) return root; // *if equal to any one node, it's lca
         else if(root -> val > maxi) 
             return lowestCommonAncestor(root -> left, p, q);    // go to left subtree
         else
