@@ -5,7 +5,7 @@ public:
         for(int it : nums){
             currSum += it;
             maxSum = max(maxSum, currSum);
-            currSum = max(0, currSum);
+            if(currSum < 0) currSum = 0;
         }
         return maxSum;
     }
