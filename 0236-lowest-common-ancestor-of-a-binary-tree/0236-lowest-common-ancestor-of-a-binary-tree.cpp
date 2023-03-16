@@ -1,15 +1,22 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root == NULL) return NULL;
-        if(root == p || root == q) return root; //even if other is left or right, lca is present node
-
+        if(root == p || root == q) return root;
+        if(root == NULL) {
+            // there isn' a niode in that partcular sub tree
+            return NULL;
+        }
+        
         TreeNode* left = lowestCommonAncestor(root->left, p, q);
         TreeNode* right = lowestCommonAncestor(root->right, p, q);
-
-        if(left == NULL) return right; //none of elements are present in left
-        if(right == NULL) return left; //none of elements are present in right
-
-        return root; // each of elements present in left and right subtrees
+        
+        if(left == NULL){
+            // p, q arent present in left, so they would be in  right
+            return right;
+        }
+        else if(right == NULL) 
+            return left;
+        else return root;
+        
     }
 };
